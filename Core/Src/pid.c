@@ -219,7 +219,7 @@ void move_values(float* values, int size){
 		values[i-1] = values[i];
 	}
 }
-//controls right motor
+//controls left motor
 void pid_left(float error){
 	static float integral_left = 0;
 	const float Iconst = 0.17f;
@@ -235,7 +235,7 @@ void pid_left(float error){
 	debug_turn_sat_l = turn_sat;
 }
 
-//controls left motor
+//controls right motor
 void pid_right(float error){
 	static float integral_right = 0;
 	const float Iconst = 0.2f;
@@ -264,7 +264,6 @@ void pid_global() {
 
 	pid_left(left_velocity - right_speed_av_exp);
 	pid_right(right_velocity - left_speed_av_exp);
-//	set_velocity(2, 1000);
 
 	last_left_speed_av_exp = left_speed_av_exp;
 	last_right_speed_av_exp = right_speed_av_exp;
