@@ -230,7 +230,7 @@ void pid_left(float error){
 	if(turn > 1000)turn_sat = 1000;
 	else if(turn < -1000)turn_sat = -1000;
 	else turn_sat = turn;
-	set_velocity(2, turn_sat);
+	set_velocity(1, turn_sat);
 
 	debug_turn_sat_l = turn_sat;
 }
@@ -246,7 +246,8 @@ void pid_right(float error){
 	if(turn > 1000)turn_sat = 1000;
 	else if(turn < -1000)turn_sat = -1000;
 	else turn_sat = turn;
-	set_velocity(1,   turn_sat);
+	set_velocity(2,   turn_sat);
+
 	debug_turn_sat_r = turn_sat;
 }
 
@@ -261,8 +262,8 @@ void pid_global() {
 	move_values(left_speed_measurnemts, SPEED_MEASURMENTS_SIZE);
 	move_values(right_speed_measurnemts, SPEED_MEASURMENTS_SIZE);
 
-	pid_left(left_velocity - left_speed_av_exp);
-	pid_right(right_velocity - right_speed_av_exp);
+	pid_left(left_velocity - right_speed_av_exp);
+	pid_right(right_velocity - left_speed_av_exp);
 //	set_velocity(2, 1000);
 
 	last_left_speed_av_exp = left_speed_av_exp;
